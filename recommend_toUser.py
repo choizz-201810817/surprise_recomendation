@@ -1,3 +1,5 @@
+# 특정 유저가 보지 않은 영화들의 평점을 예측하여 예측 평점이 높은 순서대로 top10의 영화를 추천
+# surprise 라이브러리를 활용한 잠재요인 협업 필터링 추천 시스템
 #%%
 import pandas as pd
 import numpy as np

@@ -1,3 +1,4 @@
+# surprise 라이브러리를 통해 각 유저들이 평점을 등록하지 않은 영화(보지 않은 영화로 가정)의 평점을 예측
 #%%
 import pandas
 from surprise import SVD
@@ -73,10 +74,10 @@ accuracy.rmse(preds)
 import pandas as pd
 
 # 데이터 불러오기
-ratings = pd.read_csv(r'C:\sbbigdata\Restaurant_Recommendation\data\grouples_ratings.csv')
+ratings = pd.read_csv(r'C:\sbbigdata\surprise_recomendation\data\grouples_ratings.csv')
 
 # 컬럼명 제거 후 데이터 저장
-ratings.to_csv(r'C:\sbbigdata\Restaurant_Recommendation\data\ratings_noh.csv', index=False, header=False)
+ratings.to_csv(r'C:\sbbigdata\surprise_recomendation\data\ratings_noh.csv', index=False, header=False)
 
 # %%
 # os파일 불러오기
@@ -84,7 +85,7 @@ ratings.to_csv(r'C:\sbbigdata\Restaurant_Recommendation\data\ratings_noh.csv', i
 from surprise import Reader
 
 reader = Reader(line_format="user item rating timestamp", sep=',', rating_scale=(0.5, 5))
-data = Dataset.load_from_file(r"C:\sbbigdata\Restaurant_Recommendation\data\ratings_noh.csv", reader=reader)
+data = Dataset.load_from_file(r"C:\sbbigdata\surprise_recomendation\data\ratings_noh.csv", reader=reader)
 
 trainset, testset = train_test_split(data, test_size=.25, random_state=0)
 
@@ -181,4 +182,3 @@ print(svdGrid.best_score)
 
 gridSearchResultDf = pd.DataFrame(svdGrid.cv_results)[['params', 'rank_test_rmse', 'rank_test_mae']]
 gridSearchResultDf.head()
-# %%
